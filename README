@@ -1,0 +1,9 @@
+Simple script to list the order of pam settings
+
+Usage: ./pam-list-stack.pl6 <pamfile> <method>
+
+       <pamfile> is any file in /etc/pam.d directory
+       <method> is any of [auth][session][password][account]
+
+
+Only the perl6 version is ready
