@@ -15,12 +15,19 @@ fi
 
 while IFS='' read -r line || [[ -n "$line" ]];
 do
-    if egrep -q "^@include" "$line"
+    if [[ $line =~ ^@ ]];
     then
-        while IFS='' read -r nestedline || [[ -n "$nestedline" ]];
+        nestedline=$(echo "$line" | awk '{print $2}')
+        while IFS='' read -r nested || [[ -n "$nested" ]];
         do
-            egrep "^${2}.*" "$nestedline"
-        done
-        
-    egrep "^${2}.*" "$line"
-done < /etc/pam.d/"${1}"
+            if [[ $nested =~ ^${2} ]];
+            then
+                echo "$nested"
+            fi
+        done </etc/pam.d/"${nestedline}"
+    fi  
+    if [[ $line =~ ^${2} ]];
+    then
+        echo "$line"
+    fi
+done </etc/pam.d/"${1}"
