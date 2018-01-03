@@ -1,10 +1,11 @@
 #!/bin/bash
 
 function usage(){
+    echo "Usage: $0 <pamfile> <method>"
     echo ""
-    echo "      lists full pam stack for given service."
-    echo "      $0 servicename type"
-    echo "      example $0 sshd auth"
+    echo "       <pamfile> is any file in /etc/pam.d directory"
+    echo "       <method> is any of [auth][session][password][account]"
+    echo ""
 }
 
 if [[ ! $# = 2 ]]
